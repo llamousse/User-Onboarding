@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 
-const UserForm = ({ errors, touched, values, status }) => {
+const UserForm = ({ errors, touched, values, status, isSubmitting }) => {
     const [user, setUser] = useState([]);
     // console.log(user);
 
@@ -37,7 +37,7 @@ const UserForm = ({ errors, touched, values, status }) => {
                     <Field type="checkbox" name="tos" checked={values.tos} />
                     <span  className="checkmark" />
                 </label>
-                <button type="submit">Submit</button>
+                <button type="submit" disabled={isSubmitting}>Submit</button>
             </Form>
 
             {user.map(users => (
@@ -65,18 +65,32 @@ const FormikUserForm = withFormik({
             .email('Email not valid')
             .required('Email is required'),
         password: Yup.string()
-            .min(8, "Password must be 8 characters or longer")
-            .required('Password is required')
+            .min(8, 'Password must be 8 characters or longer')
+            .required('Password is required'),
+        tos: Yup.boolean()
+            .oneOf([true], 'Must Accept Terms of Service')
     }),
 
-    handleSubmit(values, { setStatus }) {
+    handleSubmit(values, { resetForm, setErrors, setSubmitting, setStatus }) {
         // console.log('form submitted', values);
-        axios.post('https://reqres.in/api/users', values)
+        if (values.email === "vyue013@gmail.com") {
+            setErrors({ email: "That email is already taken" });
+            setSubmitting(false);
+        } 
+        else {
+            axios.post('https://reqres.in/api/users', values)
             .then(res => {
                 // console.log(res)
                 setStatus(res.data);
+                resetForm();
+                setSubmitting(false);
             })
-            .catch(err => console.log(err.response));
+            .catch(err => {
+                console.log(err.response);
+                setSubmitting(false);
+            });
+        }
+
     }
 
 })(UserForm);
