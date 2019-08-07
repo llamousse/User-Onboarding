@@ -56,7 +56,10 @@ const FormikUserForm = withFormik({
     }),
 
     handleSubmit(values) {
-        console.log('form submitted', values);
+        // console.log('form submitted', values);
+        axios.post('https://reqres.in/api/users', values)
+            .then(res => console.log(res))
+            .catch(err => console.log(err.response));
     }
 
 })(UserForm);
