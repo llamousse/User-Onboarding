@@ -35,6 +35,9 @@ const UserForm = ({ errors, touched, values, status, isSubmitting }) => {
                 <label className="checkbox-container">
                     Terms of Service
                     <Field type="checkbox" name="tos" checked={values.tos} />
+                    {touched.tos && errors.tos && (
+                    <p className="error">{errors.tos}</p>
+                    )}
                     <span  className="checkmark" />
                 </label>
                 <button type="submit" disabled={isSubmitting}>Submit</button>
