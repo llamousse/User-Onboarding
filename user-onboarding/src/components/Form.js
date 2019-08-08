@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Form, Field, withFormik } from 'formik';
+import { Form, Button, List, Header } from 'semantic-ui-react'
+import { Form as FormUser, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 
 const UserForm = ({ errors, touched, values, status, isSubmitting }) => {
@@ -15,37 +16,51 @@ const UserForm = ({ errors, touched, values, status, isSubmitting }) => {
 
     return (
         <div className="user-onboard">
-            <h1>Welcome!</h1>
-            <Form>
-                <Field type="text" name="name" placeholder="Name" />
-                {touched.name && errors.name && (
-                    <p className="error">{errors.name}</p>
-                )}
+            <h1>Get Started</h1>
+            <FormUser>
+                <Form>
+                    <Form.Field>
+                        <Field type="text" name="name" placeholder="Name" />
+                        {touched.name && errors.name && (
+                            <p className="error">{errors.name}</p>
+                        )}
+                    </Form.Field>
 
-                <Field type="text" name="email" placeholder="Email" />
-                {touched.email && errors.email && (
-                    <p className="error">{errors.email}</p>
-                )}
+                    <Form.Field>
+                        <Field type="text" name="email" placeholder="Email" />
+                        {touched.email && errors.email && (
+                            <p className="error">{errors.email}</p>
+                        )}
+                    </Form.Field>
+                    
+                    <Form.Field>
+                        <Field type="password" name="password" placeholder="Password" />
+                        {touched.password && errors.password && (
+                            <p className="error">{errors.password}</p>
+                        )}
+                    </Form.Field>
 
-                <Field type="password" name="password" placeholder="Password" />
-                {touched.password && errors.password && (
-                    <p className="error">{errors.password}</p>
-                )}
+                    <label className="checkbox-container">
+                        <Field type="checkbox" name="tos" checked={values.tos} />
+                        <span>Terms of Service</span>
+                        {touched.tos && errors.tos && (
+                        <p className="error">{errors.tos}</p>
+                        )} 
+                    </label> 
+        
+                    <br />
+                    <Button type="submit" disabled={isSubmitting}>Sign Up</Button>
+                </Form>
+            </FormUser>
 
-                <label className="checkbox-container">
-                    Terms of Service
-                    <Field type="checkbox" name="tos" checked={values.tos} />
-                    {touched.tos && errors.tos && (
-                    <p className="error">{errors.tos}</p>
-                    )}
-                    <span  className="checkmark" />
-                </label>
-                <button type="submit" disabled={isSubmitting}>Submit</button>
-            </Form>
-
-            {user.map(users => (
-                <p key={users.id}>{users.name}</p>
-            ))}
+            <Header as="h1">Signed Up</Header>
+            <List horizontal link>
+                {user.map(users => (
+                    <List.Item as='a'>
+                        <p key={users.id}>{users.name}</p>
+                    </List.Item>
+                ))}
+            </List>
 
         </div>
     );

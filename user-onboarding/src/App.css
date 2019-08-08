@@ -14,6 +14,13 @@ body {
   background-image: url('./assets/background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+}
+
+.user-onboard {
+  margin-top: 100px;
 }
 
 .App {
@@ -21,4 +28,58 @@ body {
   height: 100%;
   display: flex;
   justify-content: center;
+}
+
+.ui.form {
+  font-size: 1rem;
+  background-color: #B2B9BF;
+  padding: 50px;
+  border-radius: 1rem;
+}
+
+::placeholder {
+  color: black;
+}
+
+.checkbox-container {
+  margin: 5px;
+  border-color: rgba(34,36,38,.35);
+}
+
+.ui.form input[type=checkbox] {
+  vertical-align: baseline;
+  width: 30px;
+  height: 15px;
+}
+
+.ui.form input[type=text] {
+  color: black;
+  border-radius: .28571429rem;
+}
+
+.ui.horizontal.list {
+  display: inline-block;
+  font-size: 0;
+  max-width: 300px;
+}
+
+.ui.button {
+  margin-top: 15px;
+}
+
+.error {
+  padding-top: 10px;
+  color: maroon;
+}
+
+.ui.header {
+  color: cornsilk;
+}
+
+p {
+  color: cornsilk;
+}
+
+p:hover {
+  color: #B2B9BF;
 }
