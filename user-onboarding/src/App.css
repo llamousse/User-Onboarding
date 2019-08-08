@@ -14,9 +14,13 @@ body {
   background-image: url('./assets/background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
+  background-attachment: fixed;
+  left: 0;
+  right: 0;
 }
 
 .user-onboard {

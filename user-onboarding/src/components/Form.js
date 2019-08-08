@@ -53,7 +53,7 @@ const UserForm = ({ errors, touched, values, status, isSubmitting }) => {
                 </Form>
             </FormUser>
 
-            <Header as="h1">Signed Up</Header>
+            <Header as="h1">Sign Up List:</Header>
             <List horizontal link>
                 {user.map(users => (
                     <List.Item as='a'>
